@@ -11,6 +11,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:  # Définit les variables d'environnement pour tout le job
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -35,7 +39,3 @@ jobs:
       - name: Check coverage
         run: coverage report --fail-under=80
 
-      - name: Set environment variables
-        run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
-          echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> $GITHUB_ENV
