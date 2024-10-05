@@ -11,10 +11,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:  # Définit les variables d'environnement pour tout le job
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
