@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from . import views
+
+
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -12,3 +16,7 @@ urlpatterns = [
 
 handler404 = "oc_lettings_site.views.handler404"
 handler500 = "oc_lettings_site.views.handler500"
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

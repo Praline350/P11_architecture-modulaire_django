@@ -1,7 +1,12 @@
+"""
+Ce module contient les tests pour les vues de l'application profiles.
+"""
+
 import pytest
 from django.urls import reverse
 from profiles.models import Profile
 from django.contrib.auth.models import User
+
 
 @pytest.mark.django_db
 def test_profiles_index_view(client):
@@ -14,8 +19,8 @@ def test_profiles_index_view(client):
     Profile.objects.create(user=user2, favorite_city="Lyon")
 
     # Faire une requête à la vue index
-    response = client.get(reverse('profiles_index'))
-    
+    response = client.get(reverse("profiles_index"))
+
     # Vérifier que la page se charge correctement (status code 200)
     assert response.status_code == 200
 
@@ -27,14 +32,14 @@ def test_profiles_index_view(client):
 @pytest.mark.django_db
 def test_profile_detail_view(client):
     """Test de la vue de détail d'un profil existant."""
-    
+
     # Créer un utilisateur et un profil
     user = User.objects.create(username="user1", password="password")
-    profile = Profile.objects.create(user=user, favorite_city="Paris")
+    Profile.objects.create(user=user, favorite_city="Paris")
 
     # Faire une requête à la vue de détail du profil
-    response = client.get(reverse('profile', args=[user.username]))
-    
+    response = client.get(reverse("profile", args=[user.username]))
+
     # Vérifier que la page se charge correctement (status code 200)
     assert response.status_code == 200
 
@@ -46,9 +51,9 @@ def test_profile_detail_view(client):
 @pytest.mark.django_db
 def test_profile_detail_view_404(client):
     """Test de la vue de détail pour un profil qui n'existe pas."""
-    
+
     # Faire une requête pour un profil avec un username qui n'existe pas
-    response = client.get(reverse('profile', args=["inexistant"]))
+    response = client.get(reverse("profile", args=["inexistant"]))
 
     # Vérifier que la page renvoie une erreur 404
     assert response.status_code == 404
