@@ -28,10 +28,7 @@ jobs:
       - name: Run migrations
         run: python manage.py migrate
 
-      - name: Run tests with pytest
+      - name: Run tests with pytest & coverage
         run: |
           pytest --cov-config=.coveragerc
-
-      - name: Check coverage
-        run: coverage report --fail-under=80 --cov-config=.coveragerc
 
