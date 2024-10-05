@@ -4,6 +4,4 @@ venv
 env
 .env
 htmlcov/
-.coverage
-.coveragerc
 staticfiles/

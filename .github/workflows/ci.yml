@@ -30,8 +30,8 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          pytest
+          pytest --cov-config=.coveragerc
 
       - name: Check coverage
-        run: coverage report --fail-under=80
+        run: coverage report --fail-under=80 --cov-config=.coveragerc
 
