@@ -30,7 +30,7 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          pytest --cov=.
+          pytest
 
       - name: Check coverage
         run: coverage report --fail-under=80
