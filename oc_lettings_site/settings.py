@@ -1,7 +1,6 @@
 import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-from dotenv import load_dotenv
 from pathlib import Path
 
 
@@ -20,7 +19,7 @@ SECRET_KEY = "fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -49,10 +48,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "oc_lettings_site.urls"
 
-# Initialization of Sentry journalisation 
+# Initialization of Sentry journalisation
 
 sentry_sdk.init(
-    dsn="https://f328fea96b332b797ebe8d2fd1ec2aab@o4507962541998080.ingest.de.sentry.io/4508070741606480",
+    dsn="""https://f328fea96b332b797ebe8d2fd1ec2aab
+           @o4507962541998080.ingest.de.sentry.io/4508070741606480""",
     integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for tracing.
@@ -65,28 +65,26 @@ sentry_sdk.init(
 
 # Logs management
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
         },
-        'sentry': {
-            'level': 'ERROR',  # Envoyer les logs d'erreur à Sentry
-            'class': 'sentry_sdk.integrations.logging.EventHandler',
+        "sentry": {
+            "level": "ERROR",  # Envoyer les logs d'erreur à Sentry
+            "class": "sentry_sdk.integrations.logging.EventHandler",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'sentry'],
-            'level': 'DEBUG',
-            'propagate': True,
+    "loggers": {
+        "django": {
+            "handlers": ["console", "sentry"],
+            "level": "DEBUG",
+            "propagate": True,
         },
     },
 }
-
-
 
 
 TEMPLATES = [

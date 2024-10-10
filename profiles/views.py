@@ -40,7 +40,7 @@ def profile(request, username):
         username : Le nom d'utilisateur du profil à afficher.
 
     Retourne :
-        Une réponse HTTP avec le rendu du template de profil ou une erreur 404 si le profil n'existe pas.
+        Une réponse HTTP avec le rendu du template de profil ou une erreur 404.
     """
 
     logger.info(f"Affichage du profil pour l'utilisateur : {username}")

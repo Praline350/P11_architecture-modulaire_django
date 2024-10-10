@@ -39,7 +39,7 @@ def letting(request, letting_id):
         letting_id : ID du letting à afficher.
 
     Retourne :
-        Une réponse HTTP avec le rendu du template du letting ou une erreur 404 si le letting n'existe pas.
+        Une réponse HTTP avec le rendu du template du letting ou une erreur 404.
     """
 
     logger.info(f"Affichage du letting {letting_id}")
