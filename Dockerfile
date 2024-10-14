@@ -20,6 +20,6 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Commande pour lancer le serveur de développement Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--insecure"]
 
 # Lancer http://127.0.0.1:8000/ pour acceder au site 
