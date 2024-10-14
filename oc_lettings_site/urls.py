@@ -20,6 +20,5 @@ urlpatterns = [
 handler404 = "oc_lettings_site.views.handler404"
 handler500 = "oc_lettings_site.views.handler500"
 
-
-if settings.DEBUG:
+if settings.DEBUG or not settings.DEBUG:  # Force Django à servir les fichiers statiques
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
