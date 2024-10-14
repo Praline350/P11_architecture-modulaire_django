@@ -64,27 +64,27 @@ sentry_sdk.init(
 )
 
 # Logs management
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-        },
-        "sentry": {
-            "level": "ERROR",  # Envoyer les logs d'erreur à Sentry
-            "class": "sentry_sdk.integrations.logging.EventHandler",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console", "sentry"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#         },
+#         "sentry": {
+#             "level": "ERROR",  # Envoyer les logs d'erreur à Sentry
+#             "class": "sentry_sdk.integrations.logging.EventHandler",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console", "sentry"],
+#             "level": "DEBUG",
+#             "propagate": True,
+#         },
+#     },
+# }
 
 
 TEMPLATES = [
