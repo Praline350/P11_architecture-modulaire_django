@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", default="fallback_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
@@ -49,10 +49,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = "oc_lettings_site.urls"
 
 # Initialization of Sentry journalisation
-
 sentry_sdk.init(
-    dsn=os.getenv("SENTRY_DSN"),
-    integrations=[DjangoIntegration()],
+    dsn="https://13719de764b893bd0b243922b51f5cf7@o4507962541998080.ingest.de.sentry.io/4508121972670544",
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for tracing.
     traces_sample_rate=1.0,
@@ -62,29 +60,42 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
+# Configuration du système de logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
+        "sentry": {
+            "level": "ERROR",  # Change à "ERROR" pour envoyer seulement les erreurs
+            "class": "sentry_sdk.integrations.logging.EventHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "sentry"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+        "":
+            {
+            "handler": ["sentry"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        # Logger racine pour capturer tous les logs
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
 
-# Logs management
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "handlers": {
-#         "console": {
-#             "level": "DEBUG",
-#             "class": "logging.StreamHandler",
-#         },
-#         "sentry": {
-#             "level": "ERROR",  # Envoyer les logs d'erreur à Sentry
-#             "class": "sentry_sdk.integrations.logging.EventHandler",
-#         },
-#     },
-#     "loggers": {
-#         "django": {
-#             "handlers": ["console", "sentry"],
-#             "level": "DEBUG",
-#             "propagate": True,
-#         },
-#     },
-# }
+
 
 
 TEMPLATES = [
@@ -156,6 +167,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATIC_URL = "/static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
