@@ -62,6 +62,7 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
+
 # Logs management
 # LOGGING = {
 #     "version": 1,
