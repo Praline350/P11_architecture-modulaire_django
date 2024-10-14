@@ -22,4 +22,4 @@ EXPOSE 8000
 # Commande pour lancer le serveur de développement Django
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-# Lancer localhost:8000 pour acceder au site 
+# Lancer http://127.0.0.1:8000/ pour acceder au site 
