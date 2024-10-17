@@ -27,7 +27,7 @@ def handler500(request):
 
 def test_log_view(request):
     try:
-        result = 1 / 0
+        return 1 / 0
     except ZeroDivisionError as e:
         logger.error("Erreur de division par zéro", exc_info=e)
         return HttpResponse("Une erreur est survenue.", status=500)

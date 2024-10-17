@@ -1,9 +1,6 @@
 import os
 import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
-
-
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -48,9 +45,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "oc_lettings_site.urls"
 
-# Initialization of Sentry journalisation
+# Initialisation de la journalisation Sentry
+
 sentry_sdk.init(
-    dsn="https://13719de764b893bd0b243922b51f5cf7@o4507962541998080.ingest.de.sentry.io/4508121972670544",
+    dsn="""https://13719de764b893bd0b243922b51f5cf7@o4507962541998080
+    .ingest.de.sentry.io/4508121972670544""",
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for tracing.
     traces_sample_rate=1.0,
@@ -61,6 +60,7 @@ sentry_sdk.init(
 )
 
 # Configuration du système de logging
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -75,27 +75,19 @@ LOGGING = {
         },
     },
     "loggers": {
+        # Logger racine pour capturer tous les logs
+        "": {
+            "handlers": ["sentry", "console"],  # Combine les deux handlers
+            "level": "DEBUG",  # DEBUG capturera tous les niveaux au-dessus (WARNING, ERROR)
+            "propagate": False,
+        },
         "django": {
             "handlers": ["console", "sentry"],
             "level": "ERROR",
             "propagate": True,
         },
-        "":
-            {
-            "handler": ["sentry"],
-            "level": "WARNING",
-            "propagate": False,
-        },
-        # Logger racine pour capturer tous les logs
-        "": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
-        },
     },
 }
-
-
 
 
 TEMPLATES = [
