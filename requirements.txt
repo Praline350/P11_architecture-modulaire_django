@@ -5,6 +5,7 @@ coverage==7.6.1
 Django==3.0
 entrypoints==0.3
 flake8==3.7.0
+gunicorn==23.0.0
 iniconfig==2.0.0
 mccabe==0.6.1
 packaging==24.1

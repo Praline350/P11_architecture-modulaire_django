@@ -17,9 +17,8 @@ COPY . /app/
 # Collecter les fichiers statiques pour Django
 RUN python manage.py collectstatic --noinput
 
+# Exposer le port 8000
 EXPOSE 8000
 
-# Commande pour lancer le serveur de développement Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--insecure"]
-
-# Lancer http://127.0.0.1:8000/ pour acceder au site 
+# Commande pour lancer Gunicorn
+CMD ["gunicorn", "oc_lettings_site.wsgi:application", "--bind", "0.0.0.0:8000"]

@@ -3,9 +3,11 @@ on:
   push:
     branches:
       - master
+      - tests/docker
   pull_request:
     branches:
       - master
+      - tests/docker
 
 jobs:
   build-and-deploy:
@@ -38,7 +40,7 @@ jobs:
       # Étape pour construire l'image Docker
       - name: Build Docker image
         run: |
-          docker build -t edwin350/oc_lettings:latest .
+          docker build -t testgunicorn:latest .
 
       # Étape pour se connecter à Docker Hub
       - name: Log in to Docker Hub
