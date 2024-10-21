@@ -1,7 +1,9 @@
 param (
-    [string]$DockerUsername,
     [SecureString]$DockerPassword
 )
+
+$DockerUsername = "edwin350"
+
 
 # Vérifie que Docker est en cours d'exécution
 if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {

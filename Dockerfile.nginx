@@ -1,0 +1,12 @@
+# Utiliser l'image Nginx officielle comme image de base
+FROM nginx:latest
+
+# Copier le fichier de configuration Nginx personnalisé dans le conteneur
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY /staticfiles /usr/share/nginx/html/static/
+
+RUN chown -R nginx:nginx /usr/share/nginx/html/static
+
+# Exposer le port 80
+EXPOSE 80
