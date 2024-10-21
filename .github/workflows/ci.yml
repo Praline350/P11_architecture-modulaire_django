@@ -33,6 +33,9 @@ jobs:
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: python manage.py migrate
 
+      - name: Run linting with Flake8
+        run: flake8 --max-line-length=99 .
+
       - name: Run tests with pytest & coverage
         run: |
           pytest --cov-config=.coveragerc

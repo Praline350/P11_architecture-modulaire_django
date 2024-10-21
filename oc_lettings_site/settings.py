@@ -65,10 +65,10 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-        },
+        # "console": {
+        #     "level": "DEBUG",
+        #     "class": "logging.StreamHandler",
+        # },
         "sentry": {
             "level": "ERROR",  # Change à "ERROR" pour envoyer seulement les erreurs
             "class": "sentry_sdk.integrations.logging.EventHandler",
@@ -76,14 +76,9 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console", "sentry"],
+            "handlers": ["sentry"],
             "level": "ERROR",
             "propagate": True,
-        },
-        "": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
         },
     },
 }

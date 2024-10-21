@@ -11,11 +11,11 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+    # Collecter les fichiers statiques pour Django
+RUN python manage.py collectstatic --noinput
+
 # Copier tout le code dans le conteneur
 COPY . /app/
-
-# Collecter les fichiers statiques pour Django
-RUN python manage.py collectstatic --noinput
 
 # Exposer le port 8000
 EXPOSE 8000
