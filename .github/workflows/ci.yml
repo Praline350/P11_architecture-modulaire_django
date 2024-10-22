@@ -3,11 +3,9 @@ on:
   push:
     branches:
       - master
-      - tests/docker
   pull_request:
     branches:
       - master
-      - tests/docker
 
 jobs:
   build-and-deploy:

@@ -1,15 +1,11 @@
 services:
   django_gunicorn:
-    build:
-      context: .
-      dockerfile: Dockerfile
     image: edwin350/django_gunicorn:latest
     volumes:
       - static:/app/staticfiles
 
 
   nginx:
-    build: ./nginx 
     image: edwin350/nginx:latest
     volumes:
       - static:/static
