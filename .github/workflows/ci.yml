@@ -49,6 +49,9 @@ jobs:
       
       # Build Docker images with commit hash
       - name: Build Docker images
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: docker-compose build
 
       # Étape pour se connecter à Docker Hub
