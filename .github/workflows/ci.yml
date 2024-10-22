@@ -49,8 +49,11 @@ jobs:
       
       # Étape pour construire l'image Docker
       - name: Build Docker image
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
-          docker-compose build 
+          docker-compose build
 
 
       # Étape pour se connecter à Docker Hub
