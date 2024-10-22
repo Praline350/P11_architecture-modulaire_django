@@ -59,7 +59,5 @@ jobs:
       # Tag and Push the built images
       - name: Push Docker images
         run: |
-          docker tag edwin350/django_gunicorn:latest edwin350/django_gunicorn:${{ github.sha }}
-          docker tag edwin350/nginx:latest edwin350/nginx:${{ github.sha }}
           docker-compose push
 
