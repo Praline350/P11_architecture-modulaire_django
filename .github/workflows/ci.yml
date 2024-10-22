@@ -40,18 +40,21 @@ jobs:
         run: |
           pytest --cov-config=.coveragerc
           coverage report --fail-under=80
+      
+      # Étape pour construire l'image Docker
+      - name: Build Docker image
+        run: |
+          docker build -t edwin350/nginx:latest .
+          docker build -t edwin350/django_gunicorn:latest .
+
 
       # Étape pour se connecter à Docker Hub
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-            # Étape pour construire et démarrer les services avec docker-compose
-      - name: Build and run Docker containers
-        run: |
-          docker-compose up --build -d
-
-      # Étape pour pousser les images construites par docker-compose
+      # Étape pour pousser l'image vers Docker Hub
       - name: Push Docker image
         run: |
-          docker-compose push
+          docker push edwin350/django_gunicorn:latest
+          docker push edwin350/nginx:latest
 
