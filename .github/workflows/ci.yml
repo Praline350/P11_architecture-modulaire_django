@@ -44,8 +44,7 @@ jobs:
       # Étape pour construire l'image Docker
       - name: Build Docker image
         run: |
-          docker build -t edwin350/nginx:latest .
-          docker build -t edwin350/django_gunicorn:latest .
+          docker-compose build 
 
 
       # Étape pour se connecter à Docker Hub
@@ -55,6 +54,5 @@ jobs:
       # Étape pour pousser l'image vers Docker Hub
       - name: Push Docker image
         run: |
-          docker push edwin350/django_gunicorn:latest
-          docker push edwin350/nginx:latest
+          docker-compose push 
 
