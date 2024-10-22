@@ -40,27 +40,20 @@ jobs:
         run: |
           pytest --cov-config=.coveragerc
           coverage report --fail-under=80
-
-      # Étape pour installer Docker Compose
-      - name: Install Docker Compose
-        run: |
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
       
-      # Build Docker images with commit hash
+      # Build Docker images
       - name: Build Docker images
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-        run: docker-compose build
+        run: |
+          docker buildx build -t "edwin350/django_gunicorn:latest" .
+          docker buildx build -t "edwin350/nginx:latest" -f ./nginx/Dockerfile .
 
-      # Étape pour se connecter à Docker Hub
+      # Docker Hub login
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # Étape pour pousser l'image vers Docker Hub
-      # Tag and Push the built images
+      # Push to Docker Hub
       - name: Push Docker images
         run: |
-          docker-compose push
+          docker push edwin350/nginx:latest
+          docker push edwin350/django_gunicorn:latest
 
