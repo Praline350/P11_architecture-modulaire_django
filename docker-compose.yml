@@ -6,9 +6,6 @@ services:
     image: edwin350/django_gunicorn:latest
     volumes:
       - static:/app/staticfiles
-    env_file:
-      - .env
-
 
 
   nginx:
