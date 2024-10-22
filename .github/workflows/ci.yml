@@ -47,21 +47,20 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
       
-      # Étape pour construire l'image Docker
-      - name: Build Docker image
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-        run: |
-          docker-compose build
-
+      # Build Docker images with commit hash
+      - name: Build Docker images
+        run: docker-compose build
 
       # Étape pour se connecter à Docker Hub
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       # Étape pour pousser l'image vers Docker Hub
-      - name: Push Docker image
+      # Tag and Push the built images
+      - name: Push Docker images
         run: |
-          docker-compose push 
+          docker tag edwin350/django_gunicorn:latest edwin350/django_gunicorn:latest
+          docker tag edwin350/nginx:latest edwin350/nginx:latest
+          docker push edwin350/django_gunicorn:${{ github.sha }}
+          docker push edwin350/nginx:${{ github.sha }}
 
