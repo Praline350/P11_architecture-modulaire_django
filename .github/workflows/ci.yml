@@ -42,7 +42,12 @@ jobs:
       # Build Docker images
       - name: Build Docker images
         run: |
-          docker buildx build -t edwin350/oc_lettings:latest .
+          docker buildx build -t edwin350/oc_lettings:latest -f Dockerfile . --progress=plain
+
+      # Check if static files are collected
+      - name: Verify static files
+        run: |
+          docker run --rm edwin350/oc_lettings:latest ls -l /app/staticfiles/
 
       # Docker Hub login
       - name: Log in to Docker Hub
@@ -53,9 +58,9 @@ jobs:
         run: |
           docker push edwin350/oc_lettings:latest
 
-      # Deploy to Render
-      - name: Deploy to Render
-        env:
-          RENDER_WEBHOOK: ${{ secrets.RENDER_DEPLOY_WEBHOOK }}
-        run: |
-          curl -X POST "${RENDER_WEBHOOK}"
+      # # Deploy to Render
+      # - name: Deploy to Render
+      #   env:
+      #     RENDER_WEBHOOK: ${{ secrets.RENDER_DEPLOY_WEBHOOK }}
+      #   run: |
+      #     curl -X POST "${RENDER_WEBHOOK}"
