@@ -52,3 +52,10 @@ jobs:
       - name: Push Docker images
         run: |
           docker push edwin350/oc_lettings:latest
+
+      # Deploy to Render
+      - name: Deploy to Render
+        env:
+          RENDER_WEBHOOK: ${{ secrets.RENDER_DEPLOY_WEBHOOK }}
+        run: |
+          curl -X POST "${RENDER_WEBHOOK}"
