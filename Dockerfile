@@ -1,22 +1,28 @@
-# Utilisation d'une image de base Python
-FROM python:3.11-slim
+# pull official base image
+FROM python:3.10-alpine
 
-# Définir le répertoire de travail dans le conteneur
+# set work directory
 WORKDIR /app
 
-# Copier le fichier de dépendances
-COPY requirements.txt /app/
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
 
-# Installer les dépendances Python
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# install dependencies
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 
-# Copier tout le code dans le conteneur
-COPY . /app/
+# copy project
+COPY . .
 
-# Collecter les fichiers statiques pour Django
+# collect static files
 RUN python manage.py collectstatic --noinput
 
-# Commande pour lancer Gunicorn
-CMD ["gunicorn", "oc_lettings_site.wsgi:application", "--bind", "0.0.0.0:8000"]
-  
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
+
+
+# run gunicorn
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT

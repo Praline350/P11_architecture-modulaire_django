@@ -42,8 +42,7 @@ jobs:
       # Build Docker images
       - name: Build Docker images
         run: |
-          docker buildx build -t "edwin350/django_gunicorn:latest" .
-          docker buildx build -t "edwin350/nginx:latest" -f ./nginx/Dockerfile .
+          docker buildx build -t edwin350/oc_lettings:latest .
 
       # Docker Hub login
       - name: Log in to Docker Hub
@@ -52,6 +51,4 @@ jobs:
       # Push to Docker Hub
       - name: Push Docker images
         run: |
-          docker push edwin350/nginx:latest
-          docker push edwin350/django_gunicorn:latest
-
+          docker push edwin350/oc_lettings:latest
