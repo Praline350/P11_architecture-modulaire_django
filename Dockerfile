@@ -5,9 +5,9 @@ FROM python:3.10-alpine
 WORKDIR /app
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DEBUG=0
 
 # install dependencies
 COPY ./requirements.txt .
@@ -23,6 +23,15 @@ RUN python manage.py collectstatic --noinput
 RUN adduser -D myuser
 USER myuser
 
+# Copy entrypoint.sh
+COPY ./entrypoint.sh /app/entrypoint.sh
 
-# run gunicorn
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+# Change permissions for the entrypoint script as root
+USER root
+RUN chmod +x /app/entrypoint.sh
+
+# Switch back to non-root user
+USER myuser
+
+# Set entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
