@@ -159,11 +159,3 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / "staticfiles",
-# ]
-
-# print(f"Staticfiles_dir :{STATICFILES_DIRS}")
-print(f"base_dir: {BASE_DIR}")
-print(f"Static root = {STATIC_ROOT}")
