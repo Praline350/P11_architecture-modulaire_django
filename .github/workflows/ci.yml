@@ -42,7 +42,7 @@ jobs:
       # Build Docker images
       - name: Build Docker images
         run: |
-          docker buildx build -t edwin350/oc_lettings:${{ github.sha }} -f Dockerfile . --progress=plain
+          docker buildx build -t edwin350/oc_lettings:latest -t edwin350/oc_lettings:${{ github.sha }} -f Dockerfile . --progress=plain
 
       # Docker Hub login
       - name: Log in to Docker Hub
@@ -51,11 +51,12 @@ jobs:
       # Push to Docker Hub
       - name: Push Docker images
         run: |
+          docker push edwin350/oc_lettings:latest
           docker push edwin350/oc_lettings:${{ github.sha }}
 
-      # # Deploy to Render
-      # - name: Deploy to Render
-      #   env:
-      #     RENDER_WEBHOOK: ${{ secrets.RENDER_DEPLOY_WEBHOOK }}
-      #   run: |
-      #     curl -X POST "${RENDER_WEBHOOK}"
+      # Deploy to Render
+      - name: Deploy to Render
+        env:
+          RENDER_WEBHOOK: ${{ secrets.RENDER_DEPLOY_WEBHOOK }}
+        run: |
+          curl -X POST "${RENDER_WEBHOOK}"
