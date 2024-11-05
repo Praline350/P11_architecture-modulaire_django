@@ -22,6 +22,7 @@ RUN python manage.py collectstatic --noinput
 # add and run as non-root user
 RUN adduser -D myuser
 USER myuser
+# TODO : ne pas changer d'user
 
 # Copy entrypoint.sh
 COPY ./entrypoint.sh /app/entrypoint.sh
