@@ -2,21 +2,25 @@
 
 version: 2
 
-# Configuration des dépendances
+# Configuration des dépendances Python
 python:
-  version: "3.11.5"  # Mets la version de Python que tu utilises
+  version: "3.11.5"  # Assure-toi d'utiliser la version correcte de Python
   install:
-    - requirements: requirements.txt  # Assure-toi d'avoir un requirements.txt avec toutes les dépendances
+    - requirements: requirements.txt  # Le fichier requirements.txt contenant toutes les dépendances nécessaires
     - method: pip
-      path: .
+      path: .  # Utilise la méthode pip pour installer les dépendances à partir du répertoire actuel
 
-# Construction de la documentation avec Sphinx
+# Configuration de Sphinx pour la génération de la documentation
 sphinx:
-  configuration: docs/source/conf.py  # Spécifie le chemin vers le fichier de configuration Sphinx (habituellement dans le dossier 'docs')
+  configuration: docs/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
 
-# Build tools configuration
+# Configuration des outils de construction (build tools)
 build:
-  image: "latest"  # Utilise l'image la plus récente fournie par Read the Docs pour gérer les dépendances récentes
+  image: "ubuntu-20.04"  
+  tools:
+    python:
+      version: "3.11"  # Version de Python à utiliser pendant la construction de la doc
 
+# Variables d'environnement 
 env:
   DJANGO_SETTINGS_MODULE: "oc_lettings_site.settings"  
