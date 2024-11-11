@@ -19,5 +19,5 @@ sphinx:
   configuration: doc/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
 
 versions:
-  - latest
+  - master
   - docs
