@@ -11,8 +11,6 @@ build:
 python:
   install:
     - requirements: requirements.txt  # Le fichier requirements.txt contenant toutes les dépendances nécessaires
-    - method: pip
-      path: .  # Utilise la méthode pip pour installer les dépendances à partir du répertoire actuel
 
 # Configuration de Sphinx pour la génération de la documentation
 sphinx:
