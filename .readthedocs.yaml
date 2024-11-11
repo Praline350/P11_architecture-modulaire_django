@@ -18,11 +18,6 @@ python:
 sphinx:
   configuration: doc/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
 
-# Variables d'environnement 
-env:
-  DJANGO_SETTINGS_MODULE: "oc_lettings_site.settings"  
-
-
 versions:
   - main
   - docs
