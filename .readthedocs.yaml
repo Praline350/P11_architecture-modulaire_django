@@ -17,7 +17,3 @@ python:
 # Configuration de Sphinx pour la génération de la documentation
 sphinx:
   configuration: doc/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
-
-versions:
-  - master
-  - docs
