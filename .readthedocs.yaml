@@ -9,7 +9,6 @@ build:
 
 # Configuration des dépendances Python
 python:
-  version: "3.10"  # Assure-toi d'utiliser la version correcte de Python
   install:
     - requirements: requirements.txt  # Le fichier requirements.txt contenant toutes les dépendances nécessaires
     - method: pip
