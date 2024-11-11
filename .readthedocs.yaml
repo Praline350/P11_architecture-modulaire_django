@@ -12,7 +12,7 @@ python:
 
 # Configuration de Sphinx pour la génération de la documentation
 sphinx:
-  configuration: docs/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
+  configuration: doc/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
 
 # Configuration des outils de construction (build tools)
 build:
