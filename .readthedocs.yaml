@@ -14,13 +14,6 @@ python:
 sphinx:
   configuration: doc/source/conf.py  # Chemin vers ton fichier de configuration Sphinx 
 
-# Configuration des outils de construction (build tools)
-build:
-  image: "ubuntu-20.04"  
-  tools:
-    python:
-      version: "3.11"  # Version de Python à utiliser pendant la construction de la doc
-
 # Variables d'environnement 
 env:
   DJANGO_SETTINGS_MODULE: "oc_lettings_site.settings"  
