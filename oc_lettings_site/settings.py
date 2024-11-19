@@ -2,9 +2,9 @@ import os
 import sentry_sdk
 from pathlib import Path
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -61,6 +61,7 @@ sentry_sdk.init(
     # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
 )
+
 
 # Configuration du système de logging
 
