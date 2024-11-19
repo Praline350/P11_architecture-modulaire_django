@@ -68,10 +68,6 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
-        # "console": {
-        #     "level": "DEBUG",
-        #     "class": "logging.StreamHandler",
-        # },
         "sentry": {
             "level": "ERROR",  # Change à "ERROR" pour envoyer seulement les erreurs
             "class": "sentry_sdk.integrations.logging.EventHandler",
