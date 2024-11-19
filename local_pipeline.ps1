@@ -4,8 +4,37 @@ if (!(Get-Command git -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-$docker_username = 'edwin350'
-$docker_password = 'Chillhouse3500!'
+# Chemin vers le fichier .env
+$envFilePath = ".\.env"
+
+# Vérifie si le fichier .env existe
+if (Test-Path $envFilePath) {
+    # Lis chaque ligne du fichier
+    Get-Content $envFilePath | ForEach-Object {
+        # Ignore les lignes vides ou les commentaires
+        if ($_ -and ($_ -notmatch "^\s*#")) {
+            # Sépare la clé et la valeur
+            $parts = $_ -split "=", 2
+            $key = $parts[0].Trim()
+            $value = $parts[1].Trim()
+            
+            # Ajoute la variable à l'environnement
+            [System.Environment]::SetEnvironmentVariable($key, $value, "Process")
+        }
+    }
+} else {
+    Write-Output "Fichier .env non trouvé : $envFilePath"
+}
+
+
+Write-Output 'Login DockerHub...'
+$env:DOCKER_PASSWORD | docker login -u $env:DOCKER_USERNAME --password-stdin
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Le login failed."
+    exit $LASTEXITCODE
+}
+
 
 $commitSha = git rev-parse HEAD
 
@@ -28,13 +57,8 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-Write-Output 'Login DockerHub...'
-$docker_password | docker login -u $docker_username --password-stdin
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Le login failed."
-    exit $LASTEXITCODE
-}
+
 
 Write-Output 'Push Docker image in docker hub ...'
 docker push edwin350/oc_lettings:$commitSha
